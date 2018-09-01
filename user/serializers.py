@@ -28,8 +28,6 @@ class CreateUserSerializer(serializers.Serializer):
         fields = ('username', 'password', 'email',)
 
     def create(self, validated_data):
-        print('aqui')
-        print(' ============ ', validated_data)
         user = get_user_model().objects.create_user(**validated_data)
         user.is_superuser = False
         user.save()

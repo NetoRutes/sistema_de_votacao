@@ -5,6 +5,7 @@ from django.conf.urls import include
 
 router = routers.DefaultRouter()
 router.register('candidate', views.CandidateView)
+router.register('election', views.ElectionView)
 
 urlpatterns = [
     path('', include(router.urls))

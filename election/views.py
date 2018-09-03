@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import viewsets, permissions
 from .models import Candidate, Election
 from .serializers import CandidateSerializer, ElectionSerializer
+from .permissions import CanCreateOrUpdateElectionPermission
 
 
 class CandidateView(viewsets.ModelViewSet):
@@ -13,4 +14,4 @@ class CandidateView(viewsets.ModelViewSet):
 class ElectionView(viewsets.ModelViewSet):
     queryset = Election.objects.all()
     serializer_class = ElectionSerializer
-    permission_classes = (permissions.IsAuthenticated, )
+    permission_classes = (permissions.IsAuthenticated, CanCreateOrUpdateElectionPermission)

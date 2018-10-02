@@ -19,7 +19,7 @@ class PublicUserViewSet(viewsets.ViewSet):
         ---
         serializer: CreateUserSerializer
         """
-        
+
         serializer = CreateUserSerializer(data=request.data)
         try:
             if not serializer.is_valid(raise_exception=True):
@@ -32,4 +32,19 @@ class PublicUserViewSet(viewsets.ViewSet):
 
         data = {"detail": "User '{}' created!".format(user.username)}
         return Response(data, status=status.HTTP_201_CREATED)
-        
+
+
+class UserViewSet(viewsets.ViewSet):
+
+    @list_route(methods=['get'])
+    def current_user(self, request):
+        """
+        Get the current user
+        """
+        user = request.user
+
+        return Response({
+            'id':user.id,
+            'username': user.username,
+            'email': user.email,
+        })
